@@ -9,12 +9,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "dalloc.h"
 #include "linked_list.h"
 
 struct hash_table_t {
-    unsigned HASHSIZE;
+    uint64_t HASHSIZE;
     struct linked_list_node_t** hashtab;
 };
 
@@ -23,7 +24,7 @@ struct hash_table_t {
  *
  * @param HASHSIZE 
  */
-struct hash_table_t* new_hash_table(unsigned HASHSIZE);
+struct hash_table_t* new_hash_table(uint64_t HASHSIZE);
 
 /**
  * @brief Free a hash table
@@ -40,7 +41,7 @@ void free_hash_table(struct hash_table_t* a);
  * @param hash function to calculate obj's hash value
  * @param cmp compare function, it should return zero if its parameters is considered equal
  */
-struct linked_list_node_t* hash_table_look_up(struct hash_table_t* a, void* obj, unsigned (*hash)(void*), int (*cmp)(void*, void*));
+struct linked_list_node_t* hash_table_look_up(struct hash_table_t* a, void* obj, uint64_t (*hash)(void*), int (*cmp)(void*, void*));
 
 /**
  * @brief Hash table insert key
@@ -51,6 +52,6 @@ struct linked_list_node_t* hash_table_look_up(struct hash_table_t* a, void* obj,
  * @param cmp compare function, it should return zero if its parameters is considered equal
  * @param dup function to create a new instance of its parameter
  */
-struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, unsigned (*hash)(void*), int (*cmp)(void*, void*)); 
+struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, uint64_t (*hash)(void*), int (*cmp)(void*, void*)); 
 
 #endif

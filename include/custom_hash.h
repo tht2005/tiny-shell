@@ -12,6 +12,8 @@ uint64_t time_since_epoch();
 
 uint64_t splitmix64(uint64_t x);
 
-const size_t custom_digit_hash(uint64_t x);
+uint64_t custom_int_hash(uint64_t x);
+
+uint64_t custom_string_hash(char* str);
 
 #endif

@@ -5,9 +5,9 @@ uint64_t time_since_epoch() {
 
     gettimeofday(&tv, NULL);
 
-    unsigned long long millisecondSinceEpoch =
-        (unsigned long long)(tv.tv_sec) * 1000 +
-        (unsigned long long)(tv.tv_usec) / 1000;
+    uint64_t millisecondSinceEpoch =
+        (uint64_t)(tv.tv_sec) * 1000 +
+        (uint64_t)(tv.tv_usec) / 1000;
 
     return millisecondSinceEpoch;
 }
@@ -21,15 +21,22 @@ uint64_t splitmix64(uint64_t x) {
 }
 
 uint64_t FIXED_RANDOM = 0;
-
-const size_t custom_digit_hash(uint64_t x) {
+uint64_t custom_int_hash(uint64_t x) {
     if(FIXED_RANDOM == 0) {
         FIXED_RANDOM = time_since_epoch();
-        printf("debug: %lu\n", FIXED_RANDOM);
+        // printf("debug: %lu\n", FIXED_RANDOM);
     }
     if(FIXED_RANDOM == 0) {
         perror("custom_hash.h::time_since_epoch() generate 0!");
         exit(1);
     }
     return splitmix64(x + FIXED_RANDOM);
+}
+
+uint64_t custom_string_hash(char* str) {
+    uint64_t res = 0;
+    for(; *str; ++str) {
+        res = res * 311 + (*str) + 1;
+    }
+    return custom_int_hash(res);
 }
