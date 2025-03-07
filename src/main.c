@@ -6,10 +6,15 @@
 #include <stdlib.h>
 
 #include "version.h"
+#include "linked_list.h"
 
-int main() {
+void init() {
+    printf("TINY-SHELL %d.%d\n", TINY_SHELL_VERSION_MAJOR, TINY_SHELL_VERSION_MINOR);
+}
 
-    printf("%d %d\n", TINY_SHELL_VERSION_MAJOR, TINY_SHELL_VERSION_MINOR);
+int main(int argc, char** argv) {
+
+    init();
 
     while(1) {
         printf("tiny-shell> $ ");
