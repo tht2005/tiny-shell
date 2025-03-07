@@ -23,13 +23,21 @@
 
 void init() {
     env_init();
-    interrupt_handler();
+    trigger_interrupt_handlers();
 
     // print message ...
 }
 
+void loop() {
+    char command[500];
+    while(1) {
+        printf("%s", env_getvar("PS1"));
+        fgets(command, 400, stdin);
+    }
+}
+
 int main(int argc, char** argv) {
     init();
-    
+    loop();
     return 0;
 }

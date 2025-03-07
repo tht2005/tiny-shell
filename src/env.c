@@ -20,7 +20,8 @@ void env_exit() {
     free_stack(&stk, free_stack_element);
 }
 
-char* str(const char* s) {
+// temporary function, it shound be in string_utils.h
+char* new_str(const char* s) {
     char* a = (char *) dalloc( (strlen(s) + 1) * sizeof(char) );
     strcpy(a, s);
     return a;
@@ -33,6 +34,9 @@ void env_init() {
     stk = NULL;
 
     // source profile from ...
+
+    // temporary commands ...
+    env_putvar(new_str("PS1"), new_str("tiny-shell> $ "));
 
     atexit(env_exit);
 }
