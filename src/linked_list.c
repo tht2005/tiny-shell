@@ -47,12 +47,12 @@ void add_linked_list_back(struct linked_list_node_t* tail, struct linked_list_no
     linked_list_node_connect(node, tail);
 }
 
-void free_linked_list(struct linked_list_node_t* head) {
+void free_linked_list(struct linked_list_node_t* head, void (*free_ptr)(void*)) {
     struct linked_list_node_t* next;
     while(head) {
         next = head->next;
         if(head->ptr) {
-            free(head->ptr);
+            free_ptr(head->ptr);
         }
         free(head);
         head = next;

@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "version.h"
 
@@ -13,43 +14,44 @@
 #include "hash_table.h"
 #include "stack.h"
 
-#include "custom_hash.h"
-#include "key_value.h"
+#include "dictionary.h"
 
 #include <assert.h>
 
+char* create_string() {
+    char* a = (char* ) dalloc(50 * sizeof(char));
+    for(int i = 0; i < 10; ++i) {
+        a[i] = custom_int_hash(rand()) % 26 + 'a';
+    }
+    a[10] = 0;
+    printf("debug: %s\n", a);
+    return a;
+}
+
+char s[50];
+
 int main(int argc, char** argv) {
 
-    for(int i = 0; i < (int)1e5; ++i) {
-        assert(
-                custom_int_hash(i) ==custom_int_hash(i)
-              );
-    }
+    srand(time(NULL));
 
-    printf("%lu %lu\n",
-        custom_string_hash("abcdefgh"),
-        custom_string_hash("abcdefgh")
-    );
+    dictionary* dic = new_dictionary(1<<16);
 
-    printf("%lu %lu\n",
-        custom_string_hash("abcdefgh"),
-        custom_string_hash("abcdfghh")
-    );
+    dictionary_put(dic, create_string(), create_string());
+    dictionary_put(dic, create_string(), create_string());
+    dictionary_put(dic, create_string(), create_string());
+    dictionary_put(dic, create_string(), create_string());
 
-    printf("%lu %lu\n",
-        custom_string_hash("abcfxxxgh"),
-        custom_string_hash("abcfxxxgh")
-    );
+    struct key_value *kv;
 
-    char* a = (char *)dalloc(6 * sizeof(char));
-    scanf("%s", a);
-    char* b = (char *)dalloc(10 * sizeof(char));
-    scanf("%s", b);
-    struct key_value* kv = new_key_value(a, b);
+    scanf("%s", s);
+    kv = dictionary_get(dic, s);
+    printf("%s\n", (kv == NULL) ? "(null)" : (char*)kv->value);
 
-    printf("kv: %s %s\n", kv->key, kv->value);
-
-    free_key_value(kv);
+    dictionary_put(dic, strdup(s), create_string());
+    kv = dictionary_get(dic, s);
+    printf("%s\n", (kv == NULL) ? "(null)" : (char*)kv->value);
+    
+    free_dictionary(dic);
     
     return 0;
 }

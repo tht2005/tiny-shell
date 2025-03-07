@@ -60,7 +60,8 @@ void add_linked_list_back(struct linked_list_node_t* tail,
  * @brief Free a linked list
  *
  * @param head head of the linked list
+ * @param free_ptr function to free linked list node's ptr
  */
-void free_linked_list(struct linked_list_node_t* head);
+void free_linked_list(struct linked_list_node_t* head, void (*free_ptr)(void*));
 
 #endif

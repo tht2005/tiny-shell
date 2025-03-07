@@ -25,10 +25,10 @@ struct hash_table_t* new_hash_table(uint64_t HASHSIZE) {
     }
     return a;
 }
-void free_hash_table(struct hash_table_t* a) {
+void free_hash_table(struct hash_table_t* a, void (*free_ptr)(void*)) {
     int i;
     for(i = 0; i < a->HASHSIZE; ++i) {
-        free_linked_list(a->hashtab[i]);
+        free_linked_list(a->hashtab[i], free_ptr);
     }
     free(a->hashtab);
     free(a);
@@ -45,7 +45,7 @@ struct linked_list_node_t* hash_table_look_up(struct hash_table_t* a, void* obj,
     return NULL;
 }
 
-struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, uint64_t (*hash)(void*), int (*cmp)(void*, void*)) {
+struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, uint64_t (*hash)(void*), int (*cmp)(void*, void*), void (*free_ptr)(void*)) {
     struct linked_list_node_t* ptr = hash_table_look_up(a, obj, hash, cmp);
     int slot;
     if(ptr == NULL) {
@@ -54,7 +54,7 @@ struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, uin
         add_linked_list_front(a->hashtab[slot], ptr);
     }
     else {
-        free(ptr->ptr);
+        free_ptr(ptr->ptr);
     }
     ptr->ptr = obj;
     return ptr;

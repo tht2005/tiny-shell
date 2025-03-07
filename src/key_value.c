@@ -14,7 +14,17 @@ struct key_value* new_key_value(char* key, char* value) {
 }
 
 void free_key_value(struct key_value* a) {
-    free(a->key);
-    free(a->value);
+    if(a->key) {
+        free(a->key);
+    }
+    if(a->value) {
+        free(a->value);
+    }
     free(a);
+}
+
+struct key_value * dup_key_value(struct key_value * kv) {
+    char* key = strdup(kv->key);
+    char* value = strdup(kv->value);
+    return new_key_value(key, value);
 }
