@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Stack implementation
+ */
+
 #ifndef __STACK_H
 #define __STACK_H
 
