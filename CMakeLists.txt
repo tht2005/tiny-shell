@@ -31,7 +31,7 @@ target_include_directories(
 )
 
 configure_file(
-    include/version.h.in
-    include/version.h
+    include/config.h.in
+    include/config.h
     @ONLY
 )

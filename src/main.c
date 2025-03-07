@@ -8,7 +8,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "version.h"
+#include "config.h"
 
 #include "dalloc.h"
 #include "hash_table.h"
@@ -26,13 +26,15 @@ void init() {
     trigger_interrupt_handlers();
 
     // print message ...
+    //
 }
 
 void loop() {
+
     char command[500];
     while(1) {
         printf("%s", env_getvar("PS1"));
-        fgets(command, 400, stdin);
+        fgets(command, 490, stdin);
     }
 }
 
