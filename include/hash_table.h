@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "dalloc.h"
 #include "linked_list.h"
 
 struct hash_table_t {
