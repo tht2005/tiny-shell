@@ -4,13 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct stack_node_t* stack_t;
-
 struct stack_node_t;
 // struct stack_node_t {
 //     void* ptr;
 //     struct stack_node_t* next;
 // };
+
+typedef struct stack_node_t* stack_t;
 
 stack_t* new_stack();
 void free_stack(stack_t* stk);
