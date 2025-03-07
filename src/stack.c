@@ -6,14 +6,6 @@ struct stack_node_t {
     struct stack_node_t* next;
 };
 
-void* stack_top(stack_t* stk) {
-    if(*stk == NULL) {
-        perror("Can not access an empty stack");
-        exit(1);
-    }
-    return (*stk)->ptr;
-}
-
 struct stack_node_t* new_stack_node(void* ptr) {
     struct stack_node_t* a = (struct stack_node_t *)malloc(sizeof(struct stack_node_t));
     if(a == NULL) {
