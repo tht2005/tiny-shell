@@ -31,6 +31,7 @@ void free_hash_table(struct hash_table_t* a) {
         free_linked_list(a->hashtab[i]);
     }
     free(a->hashtab);
+    free(a);
 }
 
 struct linked_list_node_t* hash_table_look_up(struct hash_table_t* a, void* obj, unsigned (*hash)(void*), int (*cmp)(void*, void*)) {

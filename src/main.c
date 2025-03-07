@@ -22,8 +22,10 @@ struct keyvalue* new_keyvalue(char* key, char* value) {
 }
 
 void* keyvalue_dup(void* obj) {
+    char* key = (((struct keyvalue *)obj)->key);
+    char* value = (((struct keyvalue *)obj)->value);
     return (void *)
-        new_keyvalue(((struct keyvalue*)obj)->key, ((struct keyvalue *)obj)->value);
+        new_keyvalue(key, value);
 }
 
 int keyvalue_cmp(void* a, void* b) {
@@ -46,7 +48,31 @@ int main(int argc, char** argv) {
 
     struct hash_table_t* a = new_hash_table(1<<15);
 
-    hash_table_put(a, new_keyvalue("abcd", "an ba to com"), hash, keyvalue_cmp, keyvalue_dup);
+    struct keyvalue* kv;
+    struct linked_list_node_t* ptr;
+
+    kv = new_keyvalue("abcd", "an ba to com");
+    hash_table_put(a, kv, hash, keyvalue_cmp, keyvalue_dup);
+    free(kv);
+
+    kv = new_keyvalue("abcd", "an ba to com");
+    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
+    free(kv);
+    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
+
+    kv = new_keyvalue("abcde", "an ba to com");
+    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
+    free(kv);
+    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
+
+    kv = new_keyvalue("abcd", "an hai to com thoi");
+    hash_table_put(a, kv, hash, keyvalue_cmp, keyvalue_dup);
+    free(kv);
+
+    kv = new_keyvalue("abcd", "an ba to com");
+    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
+    free(kv);
+    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
 
     free_hash_table(a);
 
