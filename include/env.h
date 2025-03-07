@@ -8,6 +8,8 @@
 
 #include <string.h>
 
+#include "stack.h"
+
 /**
  * @brief Get variable's value 
  *
