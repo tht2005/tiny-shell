@@ -1,2 +1,8 @@
+/**
+ * @file
+ * @brief Basic infomation
+ */
+
+#define TINY_SHELL                  "Tiny Shell"
 #define TINY_SHELL_VERSION_MAJOR    @tiny-shell_VERSION_MAJOR@
 #define TINY_SHELL_VERSION_MINOR    @tiny-shell_VERSION_MINOR@

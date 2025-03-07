@@ -9,7 +9,7 @@
 #include "linked_list.h"
 
 void init() {
-    printf("TINY-SHELL %d.%d\n", TINY_SHELL_VERSION_MAJOR, TINY_SHELL_VERSION_MINOR);
+    printf(TINY_SHELL" %d.%d\n", TINY_SHELL_VERSION_MAJOR, TINY_SHELL_VERSION_MINOR);
 }
 
 int main(int argc, char** argv) {
