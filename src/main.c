@@ -10,66 +10,50 @@
 
 #include "dalloc.h"
 #include "hash_table.h"
-#include "void_stack.h"
-
-struct keyvalue {
-    char* key;
-    char* value;
-};
-struct keyvalue* new_keyvalue(char* key, char* value) {
-    struct keyvalue* a = (struct keyvalue *) dalloc(sizeof(struct keyvalue));
-    a->key = key;
-    a->value = value;
-    return a;
-}
-
-int keyvalue_cmp(void* a, void* b) {
-    return strcmp(
-        ((struct keyvalue *)a)->key,
-        ((struct keyvalue *)b)->key
-    );
-}
-
-unsigned hash(void* obj) {
-    char* s = ((struct keyvalue *)obj)->key;
-    unsigned res = 0;
-    for(; *s; ++s) {
-        res = res * 311 + *s + 1;
-    }
-    return res;
-}
+#include "stack.h"
 
 char command[5000];
 
 int main(int argc, char** argv) {
+    
+    struct stack_node_t* stk = NULL;
 
-    struct hash_table_t* a = new_hash_table(1<<15);
+    for(int i = 0; i < 100; ++i) {
+        int* a = (int*)dalloc(10 * sizeof(int));
+        stack_push(&stk, (void*)a);
+    }
+    for(int i = 0; i < 1000; ++i) {
+        stack_top(&stk);
+    }
 
-    struct keyvalue* kv;
-    struct linked_list_node_t* ptr;
+    for(int i = 0; i < 50; ++i) {
+        stack_pop(&stk);
+    }
+    for(int i = 0; i < 1000; ++i) {
+        stack_top(&stk);
+    }
 
-    kv = new_keyvalue("abcd", "an ba to com");
-    hash_table_put(a, kv, hash, keyvalue_cmp);
+    for(int i = 0; i < 100; ++i) {
+        int* a = (int*)dalloc(10 * sizeof(int));
+        stack_push(&stk, (void*)a);
+    }
 
-    kv = new_keyvalue("abcd", "an ba to com");
-    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
-    free(kv);
-    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
+    for(int i = 0; i < 1000; ++i) {
+        stack_top(&stk);
+    }
 
-    kv = new_keyvalue("abcde", "an ba to com");
-    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
-    free(kv);
-    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
+    for(int i = 0; i < 99; ++i) {
+        stack_pop(&stk);
+    }
+    for(int i = 0; i < 1000; ++i) {
+        stack_top(&stk);
+    }
 
-    kv = new_keyvalue("abcd", "an hai to com thoi");
-    hash_table_put(a, kv, hash, keyvalue_cmp);
+    free_stack(&stk);
 
-    kv = new_keyvalue("abcd", "an ba to com");
-    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
-    free(kv);
-    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
-
-    free_hash_table(a);
+    for(int i = 0; i < 1000; ++i) {
+        stack_top(&stk);
+    }
 
     return 0;
 }

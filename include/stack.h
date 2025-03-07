@@ -10,14 +10,12 @@ struct stack_node_t;
 //     struct stack_node_t* next;
 // };
 
-typedef struct stack_node_t* stack_t;
+void* stack_top(struct stack_node_t** top);
 
-stack_t* new_stack();
-void free_stack(stack_t* stk);
+void stack_push(struct stack_node_t** top, void* ptr);
 
-void* stack_top(stack_t* stk);
+void stack_pop(struct stack_node_t** top);
 
-void stack_push(stack_t* stk, void* ptr);
-void stack_pop(stack_t* stk);
+void free_stack(struct stack_node_t** top);
 
 #endif
