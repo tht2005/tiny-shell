@@ -18,8 +18,11 @@
 
 #include "env.h"
 #include "interrupt.h"
+#include "dinput.h"
 
 #include <assert.h>
+
+#include <ctype.h>
 
 void init() {
     env_init();
@@ -30,11 +33,15 @@ void init() {
 }
 
 void loop() {
-
-    char command[500];
     while(1) {
         printf("%s", env_getvar("PS1"));
-        fgets(command, 490, stdin);
+        char* cmd = dfgets(stdin);
+        printf("your cmd: %s\n", cmd);
+        int cmp = strcmp(cmd, "exit");
+        free(cmd);
+        if(cmp == 0) {
+            break;
+        }
     }
 }
 

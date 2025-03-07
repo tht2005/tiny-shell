@@ -11,4 +11,12 @@
  */
 void* dalloc(size_t size);
 
+/**
+ * @brief Wrapper for realloc
+ *
+ * @param ptr 
+ * @param size 
+ */
+void* drealloc(void* ptr, size_t size);
+
 #endif
