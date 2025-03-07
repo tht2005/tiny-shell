@@ -32,29 +32,7 @@ void env_init() {
     dic = new_dictionary(HASHSIZE);
     stk = NULL;
 
-    env_putvar(str("key"), str("value"));
-    env_putvar(str("key2"), str("value2"));
-    env_putvar(str("key3"), str("value3"));
-    env_putvar(str("key4"), str("value4"));
-    env_putvar(str("key5"), str("value5"));
-    env_putvar(str("key6"), str("value6"));
-
-    printf("key=%s\n", env_getvar("key"));
-    printf("key2=%s\n", env_getvar("key2"));
-    printf("key6=%s\n", env_getvar("key6"));
-
-    env_pushvar("key2");
-    env_putvar(str("key2"), str("xxx"));
-
-    printf("key=%s\n", env_getvar("key"));
-    printf("key2=%s\n", env_getvar("key2"));
-    printf("key6=%s\n", env_getvar("key6"));
-
-    env_popvar("key2");
-
-    printf("key=%s\n", env_getvar("key"));
-    printf("key2=%s\n", env_getvar("key2"));
-    printf("key6=%s\n", env_getvar("key6"));
+    // source profile from ...
 
     atexit(env_exit);
 }

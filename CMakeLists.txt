@@ -9,9 +9,11 @@ set(SRC_FILES   src/main.c
                 src/linked_list.c
                 src/hash_table.c
                 src/dalloc.c src/stack.c
-                src/env.c src/custom_hash.c
+                src/env.c
+                src/custom_hash.c
                 src/dictionary.c
                 src/key_value.c
+                src/interrupt.c
             )
 
 add_executable(tiny-shell ${SRC_FILES}) 

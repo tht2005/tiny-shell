@@ -17,11 +17,15 @@
 #include "dictionary.h"
 
 #include "env.h"
+#include "interrupt.h"
 
 #include <assert.h>
 
 void init() {
     env_init();
+    interrupt_handler();
+
+    // print message ...
 }
 
 int main(int argc, char** argv) {
