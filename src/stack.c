@@ -47,5 +47,5 @@ void free_stack(struct stack_node_t** top) {
     while(*top != NULL) {
         stack_pop(top);
     }
-    free(stk);
+    free(*top);
 }
