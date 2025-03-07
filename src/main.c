@@ -10,71 +10,21 @@
 #include "hash_table.h"
 #include "dalloc.h"
 
-struct keyvalue {
-    char* key;
-    char* value;
-};
-struct keyvalue* new_keyvalue(char* key, char* value) {
-    struct keyvalue* a = (struct keyvalue *) dalloc(sizeof(struct keyvalue));
-    a->key = key;
-    a->value = value;
-    return a;
+void init() {
+    printf(TINY_SHELL" version %d.%d\n", TINY_SHELL_VERSION_MAJOR, TINY_SHELL_VERSION_MINOR);
 }
 
-void* keyvalue_dup(void* obj) {
-    char* key = (((struct keyvalue *)obj)->key);
-    char* value = (((struct keyvalue *)obj)->value);
-    return (void *)
-        new_keyvalue(key, value);
-}
-
-int keyvalue_cmp(void* a, void* b) {
-    return strcmp(
-        ((struct keyvalue *)a)->key,
-        ((struct keyvalue *)b)->key
-    );
-}
-
-unsigned hash(void* obj) {
-    char* s = ((struct keyvalue *)obj)->key;
-    unsigned res = 0;
-    for(; *s; ++s) {
-        res = res * 311 + *s + 1;
-    }
-    return res;
-}
+char command[5000];
 
 int main(int argc, char** argv) {
 
-    struct hash_table_t* a = new_hash_table(1<<15);
-
-    struct keyvalue* kv;
-    struct linked_list_node_t* ptr;
-
-    kv = new_keyvalue("abcd", "an ba to com");
-    hash_table_put(a, kv, hash, keyvalue_cmp, keyvalue_dup);
-    free(kv);
-
-    kv = new_keyvalue("abcd", "an ba to com");
-    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
-    free(kv);
-    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
-
-    kv = new_keyvalue("abcde", "an ba to com");
-    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
-    free(kv);
-    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
-
-    kv = new_keyvalue("abcd", "an hai to com thoi");
-    hash_table_put(a, kv, hash, keyvalue_cmp, keyvalue_dup);
-    free(kv);
-
-    kv = new_keyvalue("abcd", "an ba to com");
-    ptr = hash_table_look_up(a, kv, hash, keyvalue_cmp);
-    free(kv);
-    printf("debug: %s\n", (ptr) ? (char*)(((struct keyvalue *)ptr->ptr)->value) : "(null)");
-
-    free_hash_table(a);
+    init();
+    
+    while(1) {
+        printf("tiny-shell> $ ");
+        fgets(command, 4999, stdin);
+        printf("Your command: %s\n", command);
+    }
 
     return 0;
 }
