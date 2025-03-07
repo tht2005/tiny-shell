@@ -45,7 +45,7 @@ struct linked_list_node_t* hash_table_look_up(struct hash_table_t* a, void* obj,
     return NULL;
 }
 
-struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, unsigned (*hash)(void*), int (*cmp)(void*, void*), void* (*dup)(void*)) {
+struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, unsigned (*hash)(void*), int (*cmp)(void*, void*)) {
     struct linked_list_node_t* ptr = hash_table_look_up(a, obj, hash, cmp);
     int slot;
     if(ptr == NULL) {
@@ -56,6 +56,6 @@ struct linked_list_node_t* hash_table_put(struct hash_table_t* a, void* obj, uns
     else {
         free(ptr->ptr);
     }
-    ptr->ptr = dup(obj);
+    ptr->ptr = obj;
     return ptr;
 }
