@@ -18,42 +18,19 @@ int main(int argc, char** argv) {
     
     struct stack_node_t* stk = NULL;
 
-    for(int i = 0; i < 100; ++i) {
-        int* a = (int*)dalloc(10 * sizeof(int));
-        stack_push(&stk, (void*)a);
-    }
-    for(int i = 0; i < 1000; ++i) {
-        stack_top(&stk);
-    }
-
-    for(int i = 0; i < 50; ++i) {
-        stack_pop(&stk);
-    }
-    for(int i = 0; i < 1000; ++i) {
-        stack_top(&stk);
-    }
-
-    for(int i = 0; i < 100; ++i) {
-        int* a = (int*)dalloc(10 * sizeof(int));
+    for(int i = 0; i < 10; ++i) {
+        int* a = (int *)dalloc(sizeof(int));
+        *a = i;
         stack_push(&stk, (void*)a);
     }
 
-    for(int i = 0; i < 1000; ++i) {
-        stack_top(&stk);
-    }
-
-    for(int i = 0; i < 99; ++i) {
+    while(stk) {
+        int val = *(int*)(stk->ptr);
+        printf("%d\n", val);
         stack_pop(&stk);
-    }
-    for(int i = 0; i < 1000; ++i) {
-        stack_top(&stk);
     }
 
     free_stack(&stk);
-
-    for(int i = 0; i < 1000; ++i) {
-        stack_top(&stk);
-    }
 
     return 0;
 }

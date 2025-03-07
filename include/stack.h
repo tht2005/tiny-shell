@@ -4,11 +4,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct stack_node_t;
-// struct stack_node_t {
-//     void* ptr;
-//     struct stack_node_t* next;
-// };
+struct stack_node_t {
+    void* ptr;
+    struct stack_node_t* next;
+};
 
 void* stack_top(struct stack_node_t** top);
 

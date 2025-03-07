@@ -1,10 +1,7 @@
 #include "dalloc.h"
 #include "stack.h"
 
-struct stack_node_t {
-    void* ptr;
-    struct stack_node_t* next;
-};
+struct stack_node_t;
 
 struct stack_node_t* new_stack_node(void* ptr) {
     struct stack_node_t* a = (struct stack_node_t *)malloc(sizeof(struct stack_node_t));
