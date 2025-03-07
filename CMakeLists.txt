@@ -20,6 +20,12 @@ target_include_directories(
     tiny-shell PUBLIC
     "${PROJECT_BINARY_DIR}/include"
     "${PROJECT_SOURCE_DIR}/include"
+
+    "${PROJECT_BINARY_DIR}/include/structure"
+    "${PROJECT_SOURCE_DIR}/include/structure"
+
+    "${PROJECT_BINARY_DIR}/include/handler"
+    "${PROJECT_SOURCE_DIR}/include/handler"
 )
 
 configure_file(
