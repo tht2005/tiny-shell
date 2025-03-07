@@ -16,42 +16,16 @@
 
 #include "dictionary.h"
 
+#include "env.h"
+
 #include <assert.h>
 
-char* create_string() {
-    char* a = (char* ) dalloc(50 * sizeof(char));
-    for(int i = 0; i < 10; ++i) {
-        a[i] = custom_int_hash(rand()) % 26 + 'a';
-    }
-    a[10] = 0;
-    printf("debug: %s\n", a);
-    return a;
+void init() {
+    env_init();
 }
 
-char s[50];
-
 int main(int argc, char** argv) {
-
-    srand(time(NULL));
-
-    dictionary* dic = new_dictionary(1<<16);
-
-    dictionary_put(dic, create_string(), create_string());
-    dictionary_put(dic, create_string(), create_string());
-    dictionary_put(dic, create_string(), create_string());
-    dictionary_put(dic, create_string(), create_string());
-
-    struct key_value *kv;
-
-    scanf("%s", s);
-    kv = dictionary_get(dic, s);
-    printf("%s\n", (kv == NULL) ? "(null)" : (char*)kv->value);
-
-    dictionary_put(dic, strdup(s), create_string());
-    kv = dictionary_get(dic, s);
-    printf("%s\n", (kv == NULL) ? "(null)" : (char*)kv->value);
-    
-    free_dictionary(dic);
+    init();
     
     return 0;
 }

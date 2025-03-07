@@ -14,8 +14,8 @@ struct stack_node_t* new_stack_node(void* ptr) {
     return a;
 }
 
-void free_stack_node(struct stack_node_t* node) {
-    free(node->ptr);
+void free_stack_node(struct stack_node_t* node, void (*free_ptr)(void*)) {
+    free_ptr(node->ptr);
     free(node);
 }
 
@@ -33,19 +33,19 @@ void stack_push(struct stack_node_t** top, void* ptr) {
     (*top) = head;
 }
 
-void stack_pop(struct stack_node_t** top) {
+void stack_pop(struct stack_node_t** top, void (*free_ptr)(void*) ) {
     if(*top == NULL) {
         perror("Can not pop an empty stack");
         exit(1);
     }
     struct stack_node_t* head = (*top)->next;
-    free_stack_node(*top);
+    free_stack_node(*top, free_ptr);
     *top = head;
 }
 
-void free_stack(struct stack_node_t** top) {
+void free_stack(struct stack_node_t** top, void (*free_ptr)(void*) ) {
     while(*top != NULL) {
-        stack_pop(top);
+        stack_pop(top, free_ptr);
     }
     free(*top);
 }

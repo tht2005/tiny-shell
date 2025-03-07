@@ -8,7 +8,13 @@
 
 #include <string.h>
 
+#include "dictionary.h"
 #include "stack.h"
+
+/**
+ * @brief Init variable environment, should be called first in main()
+ */
+void env_init();
 
 /**
  * @brief Get variable's value 
