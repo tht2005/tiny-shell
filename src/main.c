@@ -22,8 +22,11 @@ int main(int argc, char** argv) {
     
     while(1) {
         printf("tiny-shell> $ ");
-        fgets(command, 4999, stdin);
+        fgets(command, 4000, stdin);
         printf("Your command: %s\n", command);
+        if(strcmp(command, "exit\n") == 0) {
+            break;
+        }
     }
 
     return 0;
