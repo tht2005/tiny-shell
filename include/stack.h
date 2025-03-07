@@ -18,8 +18,8 @@ void* stack_top(struct stack_node_t** top);
 
 void stack_push(struct stack_node_t** top, void* ptr);
 
-void stack_pop(struct stack_node_t** top);
+void stack_pop(struct stack_node_t** top, void (*free_ptr)(void*) );
 
-void free_stack(struct stack_node_t** top);
+void free_stack(struct stack_node_t** top, void (*free_ptr)(void*) );
 
 #endif
