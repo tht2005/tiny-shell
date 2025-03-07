@@ -1,4 +1,4 @@
-#include "alloc.h"
+#include "dalloc.h"
 #include "hash_table.h"
 
 struct hash_table_t;
@@ -18,7 +18,7 @@ struct hash_table_t* new_hash_table(unsigned HASHSIZE) {
         exit(0);
     }
     a->HASHSIZE = HASHSIZE;
-    a->hashtab = (struct linked_list_node_t** ) alloc(HASHSIZE * sizeof (struct linked_list_node_t* ));
+    a->hashtab = (struct linked_list_node_t** ) dalloc(HASHSIZE * sizeof (struct linked_list_node_t* ));
     int i;
     for(i = 0; i < HASHSIZE; ++i) {
         a->hashtab[i] = create_linked_list();

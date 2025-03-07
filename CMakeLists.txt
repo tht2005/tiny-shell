@@ -5,7 +5,7 @@ project(tiny-shell VERSION 1.1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(SRC_FILES src/main.c src/linked_list.c src/hash_table.c)
+set(SRC_FILES src/main.c src/linked_list.c src/hash_table.c src/dalloc.c)
 
 add_executable(tiny-shell ${SRC_FILES}) 
 
