@@ -10,12 +10,12 @@ struct hash_table_t;
 struct hash_table_t* new_hash_table(unsigned HASHSIZE) {
     if(HASHSIZE == 0) {
         perror("Can't create a hash table with HASHSIZE=0");
-        exit(0);
+        exit(1);
     }
     struct hash_table_t* a = (struct hash_table_t*)malloc(sizeof(struct hash_table_t));
     if(a == NULL) {
         perror("Unable to create hash table");
-        exit(0);
+        exit(1);
     }
     a->HASHSIZE = HASHSIZE;
     a->hashtab = (struct linked_list_node_t** ) dalloc(HASHSIZE * sizeof (struct linked_list_node_t* ));

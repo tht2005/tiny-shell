@@ -20,7 +20,7 @@ struct linked_list_node_t* new_linked_list_node(void* ptr) {
     struct linked_list_node_t* a = (struct linked_list_node_t*)malloc(sizeof(struct linked_list_node_t));
     if(a == NULL) {
         perror("Unable to create linked list node");
-        exit(0);
+        exit(1);
     }
     a->ptr = ptr;
     a->prev = NULL;
