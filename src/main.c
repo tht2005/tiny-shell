@@ -1,7 +1,3 @@
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/wait.h>
-
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -33,15 +29,29 @@ void init() {
 }
 
 void loop() {
+
+    pid_t cpid = fork();
+    if(cpid == -1) {
+        //
+        exit(EXIT_FAILURE);
+    }
+
+    return ;
+
     while(1) {
         printf("%s", env_getvar("PS1"));
         char* cmd = dfgets(stdin);
-        printf("your cmd: %s\n", cmd);
-        int cmp = strcmp(cmd, "exit");
-        free(cmd);
-        if(cmp == 0) {
-            break;
+
+        char *token;
+        char *rest = cmd;
+
+        printf("[ ");
+        while((token = strtok_r(rest, " \t\n\v\f\r", &rest))) {
+            printf("%s, ", token);
         }
+        printf("]\n");
+
+        free(cmd);
     }
 }
 

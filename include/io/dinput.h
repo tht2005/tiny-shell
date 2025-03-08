@@ -7,4 +7,6 @@
 
 char* dfgets(FILE* stream);
 
+char** get_args(char* cmd);
+
 #endif
